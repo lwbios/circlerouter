@@ -1,0 +1,28 @@
+# dependencies
+node_modules
+
+# circlerouter (gerado automaticamente)
+.circlerouter
+
+# build output
+dist
+*.tgz
+
+# logs
+logs
+*.log
+
+# dotenv
+.env
+.env.local
+.env.*.local
+
+# caches
+.cache
+*.tsbuildinfo
+
+# editor
+.idea
+
+# OS
+.DS_Store

@@ -1,0 +1,40 @@
+{
+  "name": "@circlerouter/create",
+  "version": "0.0.1",
+  "description": "Scaffold a new circlerouter project — file-based API routing for Bun in the Next.js App Router style.",
+  "keywords": ["bun", "circlerouter", "scaffold", "create", "cli", "generator"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lwbios/circlerouter.git",
+    "directory": "packages/create-circlerouter"
+  },
+  "homepage": "https://github.com/lwbios/circlerouter/tree/main/packages/create-circlerouter#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "create-circlerouter": "./dist/index.js"
+  },
+  "files": ["dist", "template"],
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "bun build ./src/index.ts --outfile dist/index.js --target node --banner \"#!/usr/bin/env node\"",
+    "prepublishOnly": "bun run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.7.0",
+    "picocolors": "^1.1.1"
+  }
+}
