@@ -24,14 +24,18 @@ src/
 - `src/app/users/[id]/route.ts` → `GET /users/:id`
 
 Cada `route.ts` exporta funções nomeadas por método HTTP (`GET`, `POST`, `PUT`,
-`PATCH`, `DELETE`, `OPTIONS`, `HEAD`), recebendo um `CircleRequest` e devolvendo
-um `CircleResponse`:
+`PATCH`, `DELETE`, `OPTIONS`, `HEAD`), recebendo um `CircleRequest` e um
+`context.params` (igual ao Next.js 15+, `params` é assíncrono):
 
 ```ts
-import { CircleRequest, CircleResponse } from "@circlerouter/core";
+import { CircleResponse, type CircleRequest, type RouteContext } from "@circlerouter/core";
 
-export async function GET(request: CircleRequest<{ id: string }>) {
-  return CircleResponse.json({ id: request.params.id });
+export async function GET(
+  request: CircleRequest,
+  { params }: RouteContext<{ id: string }>
+) {
+  const { id } = await params;
+  return CircleResponse.json({ id });
 }
 ```
 

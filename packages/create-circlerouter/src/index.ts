@@ -20,7 +20,7 @@ import {
 } from "./utils/validate-project-name";
 
 // Mantido em sincronia com a versão publicada de "@circlerouter/core" a cada release.
-const CIRCLEROUTER_VERSION = "^0.0.1";
+const CIRCLEROUTER_VERSION = "^0.1.0";
 
 interface CliFlags {
   projectDirectory?: string;

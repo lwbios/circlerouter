@@ -1,6 +1,6 @@
 {
   "name": "@circlerouter/core",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "File-based API routing for Bun, in the Next.js App Router style — built on top of Elysia.",
   "keywords": ["bun", "elysia", "router", "api", "framework", "file-based-routing"],
   "license": "MIT",

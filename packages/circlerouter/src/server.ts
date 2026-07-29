@@ -33,8 +33,8 @@ export async function createServer(options: CreateServerOptions = {}) {
     if (!middlewareModule?.middleware) return;
     const pathname = new URL(request.url).pathname;
     if (!matchesMiddleware(pathname, middlewareModule.config?.matcher)) return;
-    // Ainda não roteamos, então não há params de rota resolvidos aqui.
-    return middlewareModule.middleware(new CircleRequest(request, {}));
+    // Ainda não roteamos, então não há params de rota nesse ponto.
+    return middlewareModule.middleware(new CircleRequest(request));
   });
 
   await registerRoutes(app, routes);

@@ -1,6 +1,6 @@
 {
   "name": "@circlerouter/create",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Scaffold a new circlerouter project — file-based API routing for Bun in the Next.js App Router style.",
   "keywords": ["bun", "circlerouter", "scaffold", "create", "cli", "generator"],
   "license": "MIT",

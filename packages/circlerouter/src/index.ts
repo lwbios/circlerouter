@@ -10,6 +10,7 @@ export type {
   MiddlewareConfig,
   MiddlewareModule,
   NextMiddleware,
+  RouteContext,
   RouteHandler,
   RouteHandlerResult,
   RouteModule,

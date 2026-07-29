@@ -33,11 +33,19 @@ export function GET() {
 
 ```ts
 // src/app/users/[id]/route.ts  ->  GET /users/:id
-import { CircleRequest, CircleResponse } from "@circlerouter/core";
+import {
+  CircleResponse,
+  type CircleRequest,
+  type RouteContext,
+} from "@circlerouter/core";
 
-export async function GET(request: CircleRequest<{ id: string }>) {
+export async function GET(
+  request: CircleRequest,
+  { params }: RouteContext<{ id: string }>
+) {
   try {
-    return CircleResponse.json({ id: request.params.id });
+    const { id } = await params;
+    return CircleResponse.json({ id });
   } catch (error) {
     return CircleResponse.json({ detail: "Algo deu errado" }, { status: 500 });
   }

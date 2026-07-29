@@ -55,9 +55,9 @@ function toResponse(result: RouteHandlerResult): Response {
 function toHandler(routeHandler: RouteHandler, route: DiscoveredRoute) {
   return async (ctx: { request: Request; params: Record<string, string> }) => {
     const params = transformParams(ctx.params ?? {}, route);
-    const request = new CircleRequest(ctx.request, params);
+    const request = new CircleRequest(ctx.request);
 
-    const result = await routeHandler(request);
+    const result = await routeHandler(request, { params: Promise.resolve(params) });
     return toResponse(result);
   };
 }

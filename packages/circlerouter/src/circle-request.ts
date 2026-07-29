@@ -1,19 +1,14 @@
-import type { RouteParams } from "./types";
-
 /**
- * Estende o Request nativo com os dados que o roteamento de arquivos já
- * resolveu: `params` (segmentos dinâmicos/catch-all) e `query` (querystring).
- * Todo o resto (method, headers, url, json(), text(), ...) vem do Request.
+ * Estende o Request nativo com `query` (querystring) já pronta. Todo o resto
+ * (method, headers, url, json(), text(), ...) vem do Request. Os segmentos
+ * dinâmicos/catch-all da rota chegam no segundo argumento do handler
+ * (`{ params }`, um `Promise` — igual ao Next.js 15+), não aqui.
  */
-export class CircleRequest<
-  Params extends RouteParams = RouteParams,
-> extends Request {
-  readonly params: Params;
+export class CircleRequest extends Request {
   readonly query: URLSearchParams;
 
-  constructor(request: Request, params: Params) {
+  constructor(request: Request) {
     super(request);
-    this.params = params;
     this.query = new URL(this.url).searchParams;
   }
 }

@@ -1,10 +1,15 @@
-import { CircleRequest, CircleResponse } from "@circlerouter/core";
+import {
+  CircleResponse,
+  type CircleRequest,
+  type RouteContext,
+} from "@circlerouter/core";
 
 // GET /files/* -> params.path é sempre string[] (catch-all obrigatório: precisa
 // de pelo menos 1 segmento, "/files" sozinho dá 404)
-export function GET(request: CircleRequest<{ path: string[] }>) {
-  return CircleResponse.json({
-    path: request.params.path,
-    joined: request.params.path.join("/"),
-  });
+export async function GET(
+  request: CircleRequest,
+  { params }: RouteContext<{ path: string[] }>
+) {
+  const { path } = await params;
+  return CircleResponse.json({ path, joined: path.join("/") });
 }

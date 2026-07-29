@@ -43,20 +43,31 @@ export function GET() {
 
 ```ts
 // src/app/users/[id]/route.ts  ->  GET /users/:id
-import { CircleRequest, CircleResponse } from "@circlerouter/core";
+import {
+  CircleResponse,
+  type CircleRequest,
+  type RouteContext,
+} from "@circlerouter/core";
 
-export async function GET(request: CircleRequest<{ id: string }>) {
+export async function GET(
+  request: CircleRequest,
+  { params }: RouteContext<{ id: string }>
+) {
   try {
-    return CircleResponse.json({ id: request.params.id });
+    const { id } = await params;
+    return CircleResponse.json({ id });
   } catch (error) {
     return CircleResponse.json({ detail: "Algo deu errado" }, { status: 500 });
   }
 }
 ```
 
+Igual ao Next.js 15+, `params` é **assíncrono** — sempre precisa de `await`. Ele
+chega no segundo argumento do handler (`context.params`), não no `request`.
+
 `CircleRequest` estende o `Request` nativo — `request.method`, `request.headers`,
-`request.json()` etc. funcionam normalmente, e ele soma `request.params`
-(segmentos dinâmicos/catch-all) e `request.query` (`URLSearchParams`).
+`request.json()` etc. funcionam normalmente, e ele soma `request.query`
+(`URLSearchParams`).
 
 > **Não desestruture métodos do request** (`const { json } = request`). Assim
 > como no `Request`/`NextRequest` nativo, `json()`/`text()`/etc. dependem do
@@ -105,9 +116,10 @@ export const config = {
 ```
 
 O middleware roda antes de qualquer rota — nesse ponto ainda não houve
-roteamento, então `request.params` sempre chega vazio (`{}`); use `request.query`
-e o resto do `Request` normalmente (`request.url`, `request.headers`, ...).
-Retornar uma `Response` (ex.: `CircleResponse.json/redirect`) interrompe a
+roteamento, então ele não recebe `params` (só as rotas recebem, no segundo
+argumento); use `request.query` e o resto do `Request` normalmente
+(`request.url`, `request.headers`, ...). Retornar uma `Response` (ex.:
+`CircleResponse.json/redirect`) interrompe a
 cadeia; não retornar nada deixa a requisição seguir normalmente. `config.matcher`
 é opcional — sem ele, o middleware roda em toda requisição.
 

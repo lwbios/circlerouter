@@ -23,8 +23,14 @@ export type RouteHandlerResult =
   | null
   | undefined;
 
+export interface RouteContext<Params extends RouteParams = RouteParams> {
+  /** Segmentos dinâmicos/catch-all da rota. Assíncrono, igual ao Next.js 15+ — precisa de `await`. */
+  params: Promise<Params>;
+}
+
 export type RouteHandler<Params extends RouteParams = RouteParams> = (
-  request: CircleRequest<Params>
+  request: CircleRequest,
+  context: RouteContext<Params>
 ) => RouteHandlerResult | Promise<RouteHandlerResult>;
 
 export type RouteModule = Partial<Record<HttpMethod, RouteHandler>>;
