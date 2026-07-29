@@ -2,7 +2,14 @@
   "name": "@circlerouter/create",
   "version": "0.1.0",
   "description": "Scaffold a new circlerouter project — file-based API routing for Bun in the Next.js App Router style.",
-  "keywords": ["bun", "circlerouter", "scaffold", "create", "cli", "generator"],
+  "keywords": [
+    "bun",
+    "circlerouter",
+    "scaffold",
+    "create",
+    "cli",
+    "generator"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -18,9 +25,12 @@
   },
   "type": "module",
   "bin": {
-    "create-circlerouter": "./dist/index.js"
+    "create-circlerouter": "dist/index.js"
   },
-  "files": ["dist", "template"],
+  "files": [
+    "dist",
+    "template"
+  ],
   "scripts": {
     "dev": "bun run src/index.ts",
     "build": "bun build ./src/index.ts --outfile dist/index.js --target node --banner \"#!/usr/bin/env node\"",
